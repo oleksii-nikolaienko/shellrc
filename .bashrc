@@ -26,6 +26,6 @@ export GREP_COLOR='0;38;5;255;48;5;196'
 alias less='less -R'
 
 function git_status_all {
-  find ./ -maxdepth 1 -mindepth 1 -type d | xargs -n1 -I{} sh -c "cd {}; if [ -d .git ] ; then echo \"\033[0;34m{}\033[0m\" ; git remote update ; git status ; fi ; cd .."
+  find ./ -maxdepth 1 -mindepth 1 -type d | xargs -n1 -I{} sh -c "cd \"{}\"; if [ -d .git ] ; then echo \"\033[0;34m{}\033[0m\" ; git remote update ; git status ; fi ; cd .."
 }
 
