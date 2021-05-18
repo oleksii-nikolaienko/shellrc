@@ -9,11 +9,12 @@ function timer_start {
 }
 function timer_stop {
   timer_seconds=$(($SECONDS - $timer))
+  #printf '%02d:%02d:%02d' $((SECONDS/3600)) $((SECONDS%3600/60)) $((SECONDS%60))
   unset timer
 }
 trap 'timer_start' DEBUG
 PROMPT_COMMAND='printf "\\u21af%$((COLUMNS-1))s\\r" ; timer_stop'
-PS1='[\t | $(printf "%4s" $timer_seconds)s] \[$(tput setaf $hostcolor)\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[$(tput sgr0)\]'
+PS1='[\t/$(printf "%04d" $timer_seconds)s] \[$(tput setaf $hostcolor)\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[$(tput sgr0)\]'
 
 
 alias ls='ls -GFh --color=auto'
@@ -26,6 +27,6 @@ export GREP_COLOR='0;38;5;255;48;5;196'
 alias less='less -R'
 
 function git_status_all {
-  find ./ -maxdepth 1 -mindepth 1 -type d | xargs -n1 -I{} sh -c "cd '{}'; if [ -d .git ] ; then tput setaf 4; echo '{}'; tput sgr0; git remote update ; git status ; fi ; cd .."
+  find ./ -maxdepth 1 -mindepth 1 -type d | xargs -n1 -I{} sh -c "cd '{}' ; if [ -d .git ] ; then tput setaf 4 ; echo '{}' ; tput sgr0 ; git remote update ; git status ; fi ; cd .."
 }
 
