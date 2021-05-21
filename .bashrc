@@ -13,18 +13,21 @@ function timer_stop {
   unset timer
 }
 trap 'timer_start' DEBUG
-PROMPT_COMMAND='printf "\\u21af%$((COLUMNS-1))s\\r" ; timer_stop'
+EOL="\xE2\x86\xAF"
+#EOL="\\u21af"
+PROMPT_COMMAND='printf "$EOL%$((COLUMNS-1))s\\r" ; timer_stop'
 PS1='[\t/$(printf "%04d" $timer_seconds)s] \[$(tput setaf $hostcolor)\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[$(tput sgr0)\]'
 
 
-alias ls='ls -GFh --color=auto'
-alias l="ls -alGFh --color=auto"
+alias ls='ls -GFh'
+alias l='ls -alGFh'
 alias ..="cd .."
 alias c="clear"
 alias grep='grep --color=auto'
 export GREP_COLOR='0;38;5;255;48;5;196'
 #http://bitmote.com/public/8-bit_color_table.png
 alias less='less -R'
+alias mc='LANG=en_EN.UTF-8 mc'
 
 function git_status_all {
   find ./ -maxdepth 1 -mindepth 1 -type d | xargs -n1 -I{} sh -c "cd '{}' ; if [ -d .git ] ; then tput setaf 4 ; echo '{}' ; tput sgr0 ; git remote update ; git status ; fi ; cd .."
