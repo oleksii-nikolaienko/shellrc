@@ -18,7 +18,7 @@ EOL="\xE2\x86\xAF"
 PROMPT_COMMAND='printf "$EOL%$((COLUMNS-1))s\\r" ; timer_stop'
 PS1='[\t/$(printf "%04d" $timer_seconds)s] \[$(tput setaf $hostcolor)\]\u@\h\[\e[m\] \[\e[1;34m\]\w\[\e[m\] \[\e[1;32m\]\$\[\e[m\] \[$(tput sgr0)\]'
 
-uname -o | grep -iq linux && LSCOL="--color=auto"
+uname | grep -iq linux && LSCOL="--color=auto"
 alias l='ls -alGFh $LSCOL'
 alias ls='ls -GFh $LSCOL'
 alias ..="cd .."
