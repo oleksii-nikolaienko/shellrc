@@ -24,7 +24,7 @@ alias ls='ls -GFh $LSCOL'
 alias ..="cd .."
 alias c="clear"
 alias grep='grep --color=auto'
-export GREP_COLOR='0;38;5;255;48;5;196'
+export GREP_COLORS='mt=0;38;5;255;48;5;196'
 #http://bitmote.com/public/8-bit_color_table.png
 alias less='less -R'
 alias mc='LANG=en_EN.UTF-8 mc'
